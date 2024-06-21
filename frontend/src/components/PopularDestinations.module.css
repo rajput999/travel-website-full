@@ -1,0 +1,60 @@
+.container {
+    padding: 20px;
+    margin-bottom: 5rem;
+}
+
+.upper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    padding-left: 3.1vw;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    padding-left: 3.1vw;
+    font-size: 17px;
+    color: gray;
+}
+
+.cardsContainer {
+    width: 100%;
+    overflow-x: scroll; /* Allow horizontal scrolling */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.cardsContainer::-webkit-scrollbar { /* WebKit browsers */
+    display: none;
+}
+
+.cards {
+    display: flex;
+    margin-top: 40px;
+    width: fit-content; /* Adjust to fit content */
+}
+
+.navigation {
+    margin-right: 3vw;
+    display: flex;
+    align-items: center;
+}
+
+.arrow {
+    height: 35px;
+    cursor: pointer;
+}
+
+.arrow svg {
+    margin: 5px;
+    height: 100%;
+    transition: transform 0.3s, fill 0.3s;
+}
+
+.arrow svg:hover {
+    transform: scale(1.1);
+    fill: rgb(112, 112, 112);
+}
