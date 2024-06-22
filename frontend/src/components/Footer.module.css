@@ -1,0 +1,72 @@
+.footer{
+    background-color: #d1d1d1;
+    height: 15rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 6rem;
+}
+
+.upper{
+    display: flex;
+}
+
+.lower{
+    display: flex;
+}
+
+.logo{
+    height: 40px;
+    margin: 0 20px;
+}
+
+.logo svg{
+    height: 100%;
+    
+}
+
+.svg{
+    height: 32px;
+    margin: 10px;
+}
+
+.svg svg{
+    height: 100%;
+    fill: #df5600;
+}
+
+.name{
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    /* padding-top: 10rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    
+}
+
+.title{
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.1rem;
+}
+.subtitle{
+    margin-bottom: 0.7rem;
+    color: grey;
+    font-weight: 600;
+    position: relative;
+    display: inline-block; /* Ensure inline-block for proper animation */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+.subtitle:hover {
+    cursor: pointer;
+    color: #df5600; /* Change text color on hover */
+    transform: translateX(5px); /* Shift text to the right by 5 pixels */
+}

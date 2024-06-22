@@ -1,0 +1,180 @@
+/* Navbar.css */
+
+/* @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  } */
+  
+  @keyframes buttonHover {
+    0%, 100% {
+      box-shadow: 0 0 10px #F2640C;
+    }
+    50% {
+      box-shadow: 0 0 20px #F2640C;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .navbar {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.05); /* Semi-transparent white background */
+  backdrop-filter: blur(4px); /* Reduced blur effect */
+    padding: 10px 20px;
+    position: absolute; /* Position the navbar absolutely */
+    width: 100%; /* Ensure the navbar spans the full width */
+    top: 0; /* Align it to the top */
+    z-index: 10; /* Ensure it sits above other content */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    transition: transform 0.3s;
+    color: white;
+  }
+  
+  .logo:hover {
+    transform: scale(1.1);
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Remove default margin */
+  }
+  
+  nav ul li {
+    margin: 0 15px;
+    cursor: pointer;
+    position: relative;
+    padding: 10px 0;
+    transition: color 0.3s;
+  }
+  
+  nav ul li:hover {
+    color: #F2640C;
+  }
+  
+  nav ul li::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #F2640C;
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s;
+  }
+  
+  nav ul li:hover::after {
+    width: 100%;
+  }
+  
+  .bookNow {
+    font-weight: 600;
+    font-size: 1rem;
+    background: linear-gradient(45deg, #ff741e, #ff6200);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 0 10px;
+    border-radius: 25px; /* More curved edges */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .signUp {
+    font-weight: 600;
+    margin: 0 10px;
+    font-size: 1rem;
+    color: white;
+    border: 2px solid #ff7927;
+    background-color: transparent;
+    padding: 10px 20px;
+    border-radius: 25px; /* More curved edges */
+    cursor: pointer;
+  }
+  
+  .bookNow:hover {
+    background: linear-gradient(45deg, #ed5b00, #F2640C);
+    transform: scale(1.05);
+    animation: buttonHover 1s infinite;
+  }
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: 0.4s;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    nav {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      position: fixed;
+      top: 50px;
+      left: 0;
+      background-color: #f8f8f8;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(-100vh);
+      transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    }
+  
+    nav.open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  
+    nav ul {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    nav ul li {
+      margin: 10px 0;
+    }
+  
+    .hamburger {
+      display: flex;
+    }
+  
+    .bookNow {
+      display: none;
+    }
+  }
+  
