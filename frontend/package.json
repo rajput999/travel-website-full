@@ -10,10 +10,17 @@
     "ajv": "^8.16.0",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
+<<<<<<< HEAD
     "react": "^16.14.0",
     "react-autocomplete": "^1.8.1",
     "react-datepicker": "^6.9.0",
     "react-dom": "^16.14.0",
+=======
+    "react": "^18.3.1",
+    "react-autocomplete": "^1.8.1",
+    "react-datepicker": "^6.9.0",
+    "react-dom": "^18.3.1",
+>>>>>>> 2d0a51579beb51f16131d5cce4d49ccfd601c80d
     "react-icons": "^5.2.1",
     "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^6.23.1",
