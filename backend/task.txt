@@ -1,0 +1,19 @@
+User Authentication and Home
+
+GET /home  ---------------> Public home page, shows general information.
+POST /signup  --------------> Create a new user.
+POST /signin  --------------> Authenticate a user.
+GET /home/user/   ----------------> Get personalized home page for an authenticated user.
+
+
+Booking Management
+
+POST /home/user/:id/booknow  --------------> Create a new booking for the user with ID :id.
+PATCH /home/user/:id/booknow/:bookingId  --------------> Update booking with ID :bookingId for the user with ID :id.
+DELETE /home/user/:id/booknow/:bookingId  --------------> Cancel booking with ID :bookingId for the user with ID :id.
+
+
+Additional Routes for Recommendations and Popular Destinations
+
+GET /home/user/:id/recommendations  -----------------> Get recommended destinations based on user's history.
+GET /popular-destinations   ------------------> Get a list of popular destinations.
