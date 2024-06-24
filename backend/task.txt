@@ -24,8 +24,10 @@ Models:
     popularDestination
     user
 
+
 Controllers
-    authController  ----------> for signin and signup of user 
+    authUser  ----------> for signin and signup of user 
+    authBooking -----------> for booking
 
 views
     ........pending

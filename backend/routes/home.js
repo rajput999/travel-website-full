@@ -1,11 +1,11 @@
 const express = require('express');
-const { signup, signin } = require('../controllers/authUser');
+const {handleUserSignin, handleUserSignup, handleVerifyEmail} = require('../controllers/authUser');
 const home = require('');
 const router = express.Router('../../frontend/src/App');
 
-router.get('/', home);
-router.post('/signup', signup);
-router.post('/signin', signin);
-
+router.get('/', );
+router.post('/signup', handleUserSignup);
+router.post('/signin', handleUserSignin);
+router.get('/verify-email', handleVerifyEmail);
 
 module.exports = router;

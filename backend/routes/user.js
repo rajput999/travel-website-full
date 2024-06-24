@@ -1,12 +1,11 @@
 const express = require('express');
-const { signup, signin } = require('../controllers/authUser');
-const { route } = require('./home');
+const {handleCreateBookingById, handleUpdateBookingById, handleDeleteBookingById} = require('../controllers/authBooking');
 const router = express.Router();
 
-router.get('/')
-router.post('/:id/booknow', handleCreateBooking());
-router.patch('/:id/booknow/:bookingId', handleUpdateBooking());
-route.delete('/:id/booknow/:bookingId', handleDeleteBooking());
+router.get('/', )
+router.post('/:id/booknow', handleCreateBookingById);
+router.patch('/:id/booknow/:bookingId', handleUpdateBookingById);
+router.delete('/:id/booknow/:bookingId', handleDeleteBookingById);
 
 
 module.exports = router;
