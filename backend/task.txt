@@ -19,15 +19,15 @@ GET /user/:id/recommendations  -----------------> Get recommended destinations b
 GET /popular-destinations   ------------------> Get a list of popular destinations.
 
 
-Models:
+Models: --------> Done
     booking
     popularDestination
     user
 
 
 Controllers
-    authUser  ----------> for signin and signup of user 
-    authBooking -----------> for booking
+    authUser  ----------> for signin and signup of user  ---------> Done
+    authBooking -----------> for booking 
 
 views
     ........pending

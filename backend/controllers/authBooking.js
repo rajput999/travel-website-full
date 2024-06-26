@@ -67,7 +67,6 @@ async function handleDeleteBookingById(req, res) {
 
     // Find the booking by ID and delete it
     const deletedBooking = await Booking.findByIdAndDelete(id);
-
     if (!deletedBooking) {
       return res.status(404).json({ message: "Booking not found" });
     }
