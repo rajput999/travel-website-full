@@ -4,28 +4,28 @@ require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 
-async function sendVerificationEmail(email) {
+async function sendVerificationEmail(Email) {
   try {
-    console.log('JWT_SECRET:', process.env.JWT_SECRET);
-    console.log('EMAIL_USER:', process.env.EMAIL_USER);
-    console.log('EMAIL_PASS:', process.env.EMAIL_PASS);
-    console.log('BASE_URL:', process.env.BASE_URL);
     // Generate verification token
-    const token = jwt.sign({ email}, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ Email}, process.env.JWT_SECRET, { expiresIn: '1h' });
     // Send verification email
     const transporter = nodemailer.createTransport({
       service: 'gmail',
+      host: 'smpt.gmail.com',
+      port: 465,
+      secure: true,
+      service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        pass: process.env.APP_PASS,
       },
     });
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: email,
-      subject: 'Email Verification',
-      text: `Please verify your email by clicking the following link: ${process.env.BASE_URL}/verify-email?token=${token}`,
+      to: Email,
+      subject: 'Email Verification for travelWebsite',
+      text: `Please verify your email by clicking the following link: ${process.env.BASE_URL}/handleVerifyEmail?token=${token}`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -39,21 +39,21 @@ async function sendVerificationEmail(email) {
 async function handleVerifyEmail(req, res) {
   try {
     const { token } = req.query;
-
+    // console.log(req);
     if (!token) {
-      return res.status(400).json({ message: 'Verification token is required.' });
+      return res.status(400).json({ message: 'from handleVerifyEmail Verification token is required.' });
     }
 
     // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    if (!decoded || !decoded.email) {
+    if (!decoded || !decoded.Email) {
       return res.status(400).json({ message: 'Invalid or expired verification token.' });
     }
 
     // Update user's email verification status in the database atomically
     const updatedUser = await User.findOneAndUpdate(
-      { email: decoded.email },
+      { email: decoded.Email },
       { $set: { isVerified: true } },
       { new: true }
     );
@@ -73,6 +73,7 @@ async function handleUserSignup(req, res) {
   const { Username, Email, Password } = req.body;
 
   try {
+    
     if(!Username){
       return res.status(400).json({ message: 'Username is required' });
     }

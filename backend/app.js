@@ -45,9 +45,10 @@ app.use("/user", userRoute);
 // Testing Routes
 app.use("/handleUserSignup",handleUserSignup);
 app.use("/handleUserSignin",handleUserSignin);
-app.use("/handleCreateBookingById,",handleCreateBookingById,);
+app.use("/handleCreateBookingById,",handleCreateBookingById);
 app.use("/handleUpdateBookingById",handleUpdateBookingById);
 app.use("/handleDeleteBookingById",handleDeleteBookingById);
-
+app.use("/sendVerificationMail", sendVerificationEmail);
+app.use("/handleVerifyEmail", handleVerifyEmail);
 
 app.listen(PORT, () => console.log(`Server started at PORT:${PORT}`));
