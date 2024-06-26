@@ -13,6 +13,7 @@ async function handleCreateBookingById(req, res) {
       to: Destination,
       date: DateOfDeparture,
       createdAt: Date.now(),
+      updatedAt: Date.now(),
     });
 
     // Save the booking to the database

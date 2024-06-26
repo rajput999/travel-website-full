@@ -1,10 +1,15 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 
 async function sendVerificationEmail(email) {
   try {
+    console.log('JWT_SECRET:', process.env.JWT_SECRET);
+    console.log('EMAIL_USER:', process.env.EMAIL_USER);
+    console.log('EMAIL_PASS:', process.env.EMAIL_PASS);
+    console.log('BASE_URL:', process.env.BASE_URL);
     // Generate verification token
     const token = jwt.sign({ email}, process.env.JWT_SECRET, { expiresIn: '1h' });
     // Send verification email
@@ -68,24 +73,36 @@ async function handleUserSignup(req, res) {
   const { Username, Email, Password } = req.body;
 
   try {
+    if(!Username){
+      return res.status(400).json({ message: 'Username is required' });
+    }
+    else if(!Email){
+      return res.status(400).json({ message: 'Email is required' });
+    }
+    else if(!Password){
+      return res.status(400).json({ message: 'Password is required' });
+    }
     // Check if the email already exists
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
+    const existingUser = await User.findOne({ email: Email });
+    const existingEmail = await User.findOne({ name: Username });
+    if (existingEmail) {
       return res.status(400).json({ message: 'User with this email already exists.' });
+    }
+    else if(existingUser){
+      return res.status(400).json({ message: 'Username already exists.' });
     }
     
     // Create a new user instance (not saved yet)
     const newUser = new User({
-      username: Username,
+      name: Username,
       email: Email,
       password: Password,
-      isVerified,
+      isVerified: false,
     });
     await newUser.save();
-    
+
     // Send verification email
-    await sendVerificationEmail(email);
+    await sendVerificationEmail(Email);
 
     // Save the new user to the database
     res.status(201).json({ message: 'User signed up successfully. Verification email sent.' });
@@ -96,8 +113,8 @@ async function handleUserSignup(req, res) {
 }
 
 async function handleUserSignin(req, res) {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email, password });
+  const { Email, Password } = req.body;
+  const user = await User.findOne({ email: Email, password: Password });
   if (!user) {
     return res.render("login", {
       error: "invalid UserName or Password",
