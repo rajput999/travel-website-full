@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const {getUser, setUser} = require("../services/auth");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
@@ -111,6 +112,7 @@ async function handleUserSignup(req, res) {
     // Send verification email
     await sendVerificationEmail(Email);
 
+
     // Save the new user to the database
     res
       .status(201)
@@ -138,12 +140,30 @@ async function handleUserSignin(req, res) {
       return res.status(400).json({ message: "Invalid Username or Password" });
     }
   }
-  res.render('/home')
+  res.redirect('/home');
 }
 
+async function GiveTokens(req,res){
+  const token = jwt.sign(
+    {
+      Username: req.body.Username,
+      Email: req.body.Email,
+    },
+    process.env.JWT_SECRET,
+  );
+  const newUser = new User({
+    name: req.body.Username,
+    email: req.body.Email,
+    password: req.body.Password,
+    isVerified: false,
+  });
+  await newUser.save();
+  return res.json({token});
+}
 module.exports = {
   sendVerificationEmail,
   handleVerifyEmail,
   handleUserSignup,
   handleUserSignin,
+  GiveTokens,
 };

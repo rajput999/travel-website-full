@@ -17,7 +17,14 @@ const {
   handleVerifyEmail,
   handleUserSignup,
   handleUserSignin,
+  GiveTokens,
 } = require("./controllers/authUser");
+const {
+  restrictedToLoggedinUsersOnly,
+  checkAuth,
+} = require("./middlewares/auth");
+
+
 
 const app = express();
 const PORT = 8000;
@@ -39,10 +46,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Router
-app.use("/", homeRoute);
-app.use("/user", userRoute);
+
 
 // Testing Routes
+/**/ 
 app.use("/handleUserSignup",handleUserSignup);
 app.use("/handleUserSignin",handleUserSignin);
 app.use("/handleCreateBookingById,",handleCreateBookingById);
@@ -50,5 +57,8 @@ app.use("/handleUpdateBookingById",handleUpdateBookingById);
 app.use("/handleDeleteBookingById",handleDeleteBookingById);
 app.use("/sendVerificationMail", sendVerificationEmail);
 app.use("/handleVerifyEmail", handleVerifyEmail);
+app.use("/GiveToken", GiveTokens);
+
+/**/
 
 app.listen(PORT, () => console.log(`Server started at PORT:${PORT}`));
