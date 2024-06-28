@@ -9,7 +9,6 @@ const homeRoute = require("./routes/home");
 const userRoute = require("./routes/user");
 const {
   handleCreateBookingById,
-  handleUpdateBookingById,
   handleDeleteBookingById,
 } = require("./controllers/authBooking");
 const {
@@ -18,6 +17,7 @@ const {
   handleUserSignup,
   handleUserSignin,
   GiveTokens,
+  giveUserForToken,
 } = require("./controllers/authUser");
 const {
   restrictedToLoggedinUsersOnly,
@@ -52,12 +52,12 @@ app.use(cookieParser());
 /**/ 
 app.use("/handleUserSignup",handleUserSignup);
 app.use("/handleUserSignin",handleUserSignin);
-app.use("/handleCreateBookingById,",handleCreateBookingById);
-app.use("/handleUpdateBookingById",handleUpdateBookingById);
-app.use("/handleDeleteBookingById",handleDeleteBookingById);
+app.use("/handleCreateBookingById,", restrictedToLoggedinUsersOnly,handleCreateBookingById);
+app.use("/handleDeleteBookingById", restrictedToLoggedinUsersOnly,handleDeleteBookingById);
 app.use("/sendVerificationMail", sendVerificationEmail);
 app.use("/handleVerifyEmail", handleVerifyEmail);
 app.use("/GiveToken", GiveTokens);
+app.use("/giveUserForToken", giveUserForToken);
 
 /**/
 

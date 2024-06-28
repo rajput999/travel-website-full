@@ -1,36 +1,28 @@
-const { getUser } = require("../services/auth");
+const { getUser, getToken } = require("../services/auth");
 
 async function restrictedToLoggedinUsersOnly(req, res, next) {
-  const userUId = req.headers["authorization"];
+  const token = getToken(req.headers["authorization"]);
 
-  if (!userUId) {
-    return res.json({message: "You have to Login First"});
-    // Temporary returning message now user should render to login page
-  }
-  
-  const token = userUId.split("Bearer ")[1];
-  
-  console.log("userUid:", userUId);
-  console.log("token:", token);
-  const user = getUser(token);
+  const decoded = getUser(token);
   
   if (!user) {
     return res.json({message: "You have to Login first"});
     // Temporary returning message now user should render to login page
   }
 
-  req.user = user;
+  req.body.Email = decoded.Email;
   next();
 }
 
 async function checkAuth(req, res, next) {
-  const userUId = req.headers["authorization"];
+  const token = getToken(authHeader.split("Bearer ")[1]);
 
-  const token = userUId.split("Bearer ")[1];
+  const decoded = getUser(token);
 
-  const user = getUser(token);
+  if (decoded) {
+    res.redirect('/profile');
+  }
 
-  req.user = user;
   next();
 }
 

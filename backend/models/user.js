@@ -5,8 +5,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   isVerified: { type: Boolean, default: false },
-  bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }],
-  history: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }],
+  bookingHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }],
 });
 
 module.exports = mongoose.model("User", UserSchema);

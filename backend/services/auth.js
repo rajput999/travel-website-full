@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 function setUser(user) {
   return jwt.sign(
@@ -20,7 +21,17 @@ function getUser(token) {
   }
 }
 
+function getToken(authHeader){
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return null;
+  }
+
+  const token = authHeader.split("Bearer ")[1];
+  return token;
+}
+
 module.exports = {
   setUser,
   getUser,
+  getToken,
 };
