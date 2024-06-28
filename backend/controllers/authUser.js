@@ -91,6 +91,7 @@ async function handleUserSignup(req, res) {
     }
     // Check if the email already exists
     const existingEmail = await User.findOne({ email: Email });
+    const existingUser = await User.findOne({ name: Username });
     if (existingEmail) {
       return res
         .status(400)
